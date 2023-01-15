@@ -24,4 +24,11 @@ public class ApiExceptionController {
 
         return new ResponseEntity<>(notFoundException.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = {Unauthorized.class})
+    public ResponseEntity<Object> controlUnauthorizedException(Unauthorized e) {
+        Unauthorized unauthorized = new Unauthorized(e.getMessage());
+
+        return new ResponseEntity<>(unauthorized.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
 }
