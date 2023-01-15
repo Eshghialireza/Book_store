@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ import java.util.List;
 public class Publisher extends BaseDomain<Long> {
     private String name;
     private String address;
+    private Date establishmentDate;
     @ManyToOne
     private User user;
     @ManyToMany
