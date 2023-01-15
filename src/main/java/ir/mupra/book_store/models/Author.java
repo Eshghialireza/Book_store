@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -18,8 +19,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Author extends BaseDomain<Long> {
     private String name;
+    private Date birthDay;
+
     @ManyToOne
     private User user;
-    @OneToMany
+    @OneToMany(mappedBy = "author")
     private List<Book> books;
 }

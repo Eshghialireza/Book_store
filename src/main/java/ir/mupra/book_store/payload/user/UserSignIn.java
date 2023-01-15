@@ -1,4 +1,4 @@
-package ir.mupra.book_store.payload;
+package ir.mupra.book_store.payload.user;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -4,8 +4,8 @@ import ir.mupra.book_store.exception.ApiDuplicateException;
 import ir.mupra.book_store.exception.NotFoundException;
 import ir.mupra.book_store.mapper.UserMapper;
 import ir.mupra.book_store.models.User;
-import ir.mupra.book_store.payload.UserSignIn;
-import ir.mupra.book_store.payload.UserSignUp;
+import ir.mupra.book_store.payload.user.UserSignIn;
+import ir.mupra.book_store.payload.user.UserSignUp;
 import ir.mupra.book_store.repository.UserRepository;
 import ir.mupra.book_store.service.UserService;
 import ir.mupra.book_store.service.base.impl.BaseServiceImpl;
@@ -18,10 +18,11 @@ import java.util.Optional;
 public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository> implements UserService {
     final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository repository, UserMapper userMapper) {
-        super(repository);
+    public UserServiceImpl(UserRepository repository, HttpSession session, UserMapper userMapper) {
+        super(repository, session);
         this.userMapper = userMapper;
     }
+
 
     @Override
     public void addNewUser(UserSignUp userSignUp) {
