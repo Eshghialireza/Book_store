@@ -1,15 +1,20 @@
 package ir.mupra.book_store.controller;
 
 import ir.mupra.book_store.payload.author.AuthorPayload;
+import ir.mupra.book_store.payload.author.AuthorResponse;
 import ir.mupra.book_store.payload.publisher.PublisherPayload;
+import ir.mupra.book_store.payload.publisher.PublisherResponse;
 import ir.mupra.book_store.payload.user.UserSignIn;
 import ir.mupra.book_store.payload.user.UserSignUp;
 import ir.mupra.book_store.service.AuthorService;
 import ir.mupra.book_store.service.PublisherService;
 import ir.mupra.book_store.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -54,5 +59,17 @@ public class UserController {
     public ResponseEntity<?> logout() {
         session.removeAttribute("userDetails");
         return ResponseEntity.ok("logged out");
+    }
+
+    // using this api to find authors that added by a user to add to another book.
+    @GetMapping("/user-authors")
+    public ResponseEntity<List<AuthorResponse>> findAuthors() {
+        List<AuthorResponse> authorResponses = authorService.findAuthorByUser();
+        return new ResponseEntity<>(authorResponses, HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/user-publishers")
+    public ResponseEntity<List<PublisherResponse>> findPublishers() {
+        List<PublisherResponse> publisherResponses = publisherService.findPublishersByUser();
+        return new ResponseEntity<>(publisherResponses, HttpStatus.ACCEPTED);
     }
 }

@@ -11,4 +11,6 @@ public interface UserService extends BaseService<User, Long> {
     void addNewUser(UserSignUp userSignUp);
 
     void signIn(UserSignIn userSignIn, HttpSession session);
+
+    User getUserFromSession();
 }

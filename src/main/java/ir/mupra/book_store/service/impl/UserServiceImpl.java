@@ -17,10 +17,12 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository> implements UserService {
     final UserMapper userMapper;
+    final HttpSession session;
 
-    public UserServiceImpl(UserRepository repository, HttpSession session, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository repository, HttpSession session, UserMapper userMapper, HttpSession session1) {
         super(repository, session);
         this.userMapper = userMapper;
+        this.session = session1;
     }
 
 
@@ -41,6 +43,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
             throw new NotFoundException("username or password is wrong");
         }
 //        user.ifPresentOrElse(thisUser -> session.setAttribute("user", thisUser));
+    }
+
+    @Override
+    public User getUserFromSession() {
+        checkUserSignedIn();
+        User user = (User) session.getAttribute("userDetails");
+        return user;
     }
 
     private void checkUserExist(String username) {
