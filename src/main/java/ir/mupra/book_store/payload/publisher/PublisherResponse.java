@@ -8,6 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class PublisherResponse {
+    private Long Id;
     private String name;
     private String address;
     private Date establishmentDate;
