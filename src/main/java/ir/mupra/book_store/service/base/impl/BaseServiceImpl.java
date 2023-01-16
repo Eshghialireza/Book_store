@@ -19,7 +19,7 @@ import java.util.Optional;
 public class BaseServiceImpl<E extends BaseDomain<ID>,
         ID extends Serializable, R extends JpaRepository<E, ID>> implements BaseService<E, ID> {
     protected final R repository;
-    final HttpSession session;
+    public final HttpSession session;
 
     @Override
     public E findById(ID id) {

@@ -4,7 +4,7 @@ import ir.mupra.book_store.models.User;
 import ir.mupra.book_store.payload.user.UserSignUp;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
     User mapUserSignUpToUser(UserSignUp userSignUp);
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class AuthorPayload {
+public class AuthorRequest {
     String name;
     Date birthDay;
 }

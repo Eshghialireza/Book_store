@@ -32,7 +32,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
     }
 
     @Override
-    public void signIn(UserSignIn userSignIn, HttpSession session) {
+    public void signIn(UserSignIn userSignIn) {
         session.removeAttribute("userDetails");
         Optional<User> user = repository.findByUsernameAndPassword(userSignIn.getUsername(), userSignIn.getPassword());
         if (user.isPresent()) {
@@ -41,6 +41,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
             throw new NotFoundException("username or password is wrong");
         }
 //        user.ifPresentOrElse(thisUser -> session.setAttribute("user", thisUser));
+    }
+
+    @Override
+    public User getUserFromSession() {
+        checkUserSignedIn();
+        User user = (User) session.getAttribute("userDetails");
+        return user;
     }
 
     private void checkUserExist(String username) {

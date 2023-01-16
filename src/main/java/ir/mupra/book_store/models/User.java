@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,9 +23,9 @@ public class User extends BaseDomain<Long> {
     private String username;
     private String password;
     @OneToMany(mappedBy = "user")
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
     @OneToMany(mappedBy = "user")
-    private List<Publisher> publishers;
+    private List<Publisher> publishers = new ArrayList<>();
     @OneToMany(mappedBy = "user")
-    private List<Author> authors;
+    private List<Author> authors = new ArrayList<>();
 }
