@@ -1,14 +1,13 @@
 package ir.mupra.book_store.models;
 
 import ir.mupra.book_store.models.base.BaseDomain;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +22,7 @@ public class Publisher extends BaseDomain<Long> {
     private Date establishmentDate;
     @ManyToOne
     private User user;
-    @ManyToMany
-    private List<Book> books;
+    @OneToMany(mappedBy = "publisher")
+    private List<Book> books = new ArrayList<>();
+
 }

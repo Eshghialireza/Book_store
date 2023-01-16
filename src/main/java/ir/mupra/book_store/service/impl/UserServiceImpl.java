@@ -17,12 +17,10 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository> implements UserService {
     final UserMapper userMapper;
-    final HttpSession session;
 
-    public UserServiceImpl(UserRepository repository, HttpSession session, UserMapper userMapper, HttpSession session1) {
+    public UserServiceImpl(UserRepository repository, HttpSession session, UserMapper userMapper) {
         super(repository, session);
         this.userMapper = userMapper;
-        this.session = session1;
     }
 
 
@@ -34,7 +32,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
     }
 
     @Override
-    public void signIn(UserSignIn userSignIn, HttpSession session) {
+    public void signIn(UserSignIn userSignIn) {
         session.removeAttribute("userDetails");
         Optional<User> user = repository.findByUsernameAndPassword(userSignIn.getUsername(), userSignIn.getPassword());
         if (user.isPresent()) {

@@ -3,7 +3,7 @@ package ir.mupra.book_store.service.impl;
 import ir.mupra.book_store.mapper.AuthorMapper;
 import ir.mupra.book_store.models.Author;
 import ir.mupra.book_store.models.User;
-import ir.mupra.book_store.payload.author.AuthorPayload;
+import ir.mupra.book_store.payload.author.AuthorRequest;
 import ir.mupra.book_store.payload.author.AuthorResponse;
 import ir.mupra.book_store.repository.AuthorRepository;
 import ir.mupra.book_store.service.AuthorService;
@@ -29,9 +29,9 @@ public class AuthorServiceImpl extends BaseServiceImpl<Author, Long, AuthorRepos
 
 
     @Override
-    public void addAuthor(AuthorPayload authorPayload) {
+    public void addAuthor(AuthorRequest authorRequest) {
         checkUserSignedIn();
-        Author author = authorMapper.authorPayloadToAuthor(authorPayload);
+        Author author = authorMapper.authorPayloadToAuthor(authorRequest);
         User user = userService.getUserFromSession();
         author.setUser(user);
         repository.save(author);

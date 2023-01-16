@@ -3,8 +3,7 @@ package ir.mupra.book_store.service.impl;
 import ir.mupra.book_store.mapper.PublisherMapper;
 import ir.mupra.book_store.models.Publisher;
 import ir.mupra.book_store.models.User;
-import ir.mupra.book_store.payload.author.AuthorResponse;
-import ir.mupra.book_store.payload.publisher.PublisherPayload;
+import ir.mupra.book_store.payload.publisher.PublisherRequest;
 import ir.mupra.book_store.payload.publisher.PublisherResponse;
 import ir.mupra.book_store.repository.PublisherRepository;
 import ir.mupra.book_store.service.PublisherService;
@@ -28,9 +27,9 @@ public class PublisherServiceImpl extends BaseServiceImpl<Publisher, Long, Publi
 
 
     @Override
-    public void addPublisher(PublisherPayload publisherPayload) {
+    public void addPublisher(PublisherRequest publisherRequest) {
         checkUserSignedIn();
-        Publisher publisher = publisherMapper.publisherPayloadToPublisher(publisherPayload);
+        Publisher publisher = publisherMapper.publisherPayloadToPublisher(publisherRequest);
         User user = userService.getUserFromSession();
         publisher.setUser(user);
         repository.save(publisher);
