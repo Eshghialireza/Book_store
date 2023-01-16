@@ -7,9 +7,20 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AuthorMapper {
     Author authorPayloadToAuthor(AuthorRequest authorRequest);
 
     List<AuthorResponse> authorsToAuthorsResponse(List<Author> authors);
+
+    static AuthorResponse authorToAuthorResponse(Author author) {
+        if (author == null) {
+            return null;
+        }
+        AuthorResponse authorResponse = new AuthorResponse();
+        authorResponse.setName(author.getName());
+        authorResponse.setBirthDay(author.getBirthDay());
+        authorResponse.setId(author.getId());
+        return authorResponse;
+    }
 }

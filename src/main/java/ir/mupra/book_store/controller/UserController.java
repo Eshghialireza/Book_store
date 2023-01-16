@@ -3,6 +3,7 @@ package ir.mupra.book_store.controller;
 import ir.mupra.book_store.payload.author.AuthorRequest;
 import ir.mupra.book_store.payload.author.AuthorResponse;
 import ir.mupra.book_store.payload.book.BookRequest;
+import ir.mupra.book_store.payload.book.BookResponse;
 import ir.mupra.book_store.payload.publisher.PublisherRequest;
 import ir.mupra.book_store.payload.publisher.PublisherResponse;
 import ir.mupra.book_store.payload.user.UserSignIn;
@@ -81,5 +82,11 @@ public class UserController {
     public ResponseEntity<?> addBook(@RequestBody BookRequest bookRequest, @PathVariable Long author_id, @PathVariable Long publisher_id) {
         bookService.addBook(bookRequest, publisher_id, author_id);
         return ResponseEntity.ok("book added");
+    }
+
+    @GetMapping("/get-books")
+    public ResponseEntity<List<BookResponse>> getBooks() {
+        List<BookResponse> bookResponses = bookService.findUserBooks();
+        return new ResponseEntity<>(bookResponses, HttpStatus.ACCEPTED);
     }
 }
